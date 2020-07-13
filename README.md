@@ -27,4 +27,3 @@
 
 ### Technology:
 - HTML, CSS, Javascript
-
