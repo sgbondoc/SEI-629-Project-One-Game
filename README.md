@@ -5,7 +5,7 @@
 ### User Stories / Game Logic:
 
 - User sees the back of 12 cards in browser 
-* Turn over all cards for user to get a quick view before only back sides of cards are in view
+- Turn over all cards for user to get a quick view before only back sides of cards are in view
 - User is able to click on back of two cards one at a time to find a matching pair
 - As user clicks on back of two cards, each card will flip over and reveal the face of the card
     - If the two flipped cards are a matching pair, they will remain flipped up
@@ -19,7 +19,7 @@
 - Add a timer for user to play against and find all matching pairs within alloted time
 - Create additional rounds with more cards each round for user to match
 - Add match found counter (counts throughout each round how many matches found)
-* Responsive to different size browsers and devices
+- Responsive to different size browsers and devices
 
 ### Wireframes:
 
