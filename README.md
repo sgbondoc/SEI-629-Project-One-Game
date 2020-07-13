@@ -11,7 +11,7 @@
     - If the two flipped cards are not a matching pair, they will flip back over to show the back side of the cards
 - User will continue to flip over cards (two at a time) and once all have been matched the game is over
 - Message the user the game is over and ask to play again
-    - If user agrees to play again, all cards reset and turn over to the backs
+    - If user agrees to play again, cards reset (moved to new positions and turned over to show back side of cards)
     - If user doesn't want to play again, say goodbye
     
 ### Other Considerations:
