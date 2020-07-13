@@ -18,5 +18,5 @@
 
 ![Wireframes](wireframes.png)
 
-#### Technology:
+### Technology:
 - HTML, CSS, Javascript
