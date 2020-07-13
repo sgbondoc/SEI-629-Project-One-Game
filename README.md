@@ -17,6 +17,8 @@
 ### Other Considerations:
 - Add a timer for user to play against and find all matching pairs within alloted time
 - Create additional rounds with more cards
+- Match found counter
+- Mobile responsive
 
 ### Wireframes:
 
@@ -24,6 +26,4 @@
 
 ### Technology:
 - HTML, CSS, Javascript
-
-
 
