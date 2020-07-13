@@ -16,7 +16,7 @@
     
 ### Other Considerations:
 - Add a timer for user to play against and find all matching pairs within alloted time
-- Create additional rounds with more cards with each round for user to match
+- Create additional rounds with more cards each round for user to match
 - Add match found counter (counts throughout each round how many matches found)
 
 ### Wireframes:
