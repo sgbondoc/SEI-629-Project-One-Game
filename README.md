@@ -1,7 +1,6 @@
 # SEI-629-Project-One-Game
 
-## Memory Game
-## Fast Food Memory
+## Game: Fast Food Memory
 
 ### User Stories:
 - User sees logo, short description of how to play, and the back of 12 cards
