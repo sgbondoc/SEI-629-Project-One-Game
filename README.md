@@ -2,10 +2,10 @@
 
 ## Game: Fast Food Memory
 
-### User Stories:
+### User Stories / Game Logic:
 
-- User sees logo, short description of how to play, and the back of 12 cards
-- User is able to click on two cards at a time to find a matching pair
+- User sees the back of 12 cards in browser
+- User is able to click on back of two cards one at a time to find a matching pair
 - As user clicks on back of two cards, each card will flip over and reveal the face of the card
     - If the two flipped cards are a matching pair, they will remain flipped up
     - If the two flipped cards are not a matching pair, they will flip back over to show the back side of the cards
@@ -13,6 +13,10 @@
 - Message the user the game is over and ask to play again
     - If user agrees to play again, all cards reset and turn over to the backs
     - If user doesn't want to play again, say goodbye
+    
+### Other Considerations:
+- Add a timer for user to play against and find all matching pairs within alloted time
+- Create additional rounds with more cards
 
 ### Wireframes:
 
