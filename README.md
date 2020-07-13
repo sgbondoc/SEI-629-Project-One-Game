@@ -20,7 +20,7 @@
 
 ### Wireframes:
 
-![Wireframes](wireframes.png)
+![Wireframes] wireframes.png
 
 ### Technology:
 - HTML, CSS, Javascript
