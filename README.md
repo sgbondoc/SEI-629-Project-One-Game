@@ -12,4 +12,6 @@ User Stories:
 - User will continue to flip over cards (two at a time) and once all have been matched the game is over
 - Message the user the game is over and ask to play again
 
-![Wireframes](wireframes.png)
+![Wireframes]
+
+(wireframes.png)
