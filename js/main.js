@@ -4,7 +4,8 @@ console.log("Hello")
 // Cached Elements
 // Event Listeners
 // Functions / Game Logic
-
+let time = 30
+const cardsContainer = document.querySelector('.cards')
 
 // SET UP GAME PAGE
 
@@ -22,6 +23,16 @@ console.log("Hello")
     // cards should be placed in 12 random positions
     // show image of back of card for each of the 12 positions
         // OPTIONAL: flash the front of cards at same time and flip back over to back of cards
+
+const placeMemoryCards = (numOfCards) => {
+    for (let i = 0; i < numOfCards; i++) {
+        let memoryCard = document.createElement('img')
+        memoryCard.setAttribute('class', 'memoryCard')
+        memoryCard.setAttribute('src', 'images/back.jpg')
+        cardsContainer.append(memoryCard)
+    }
+}
+
 
 // User clicks on start button:
     // add event listener to "start" button
@@ -67,3 +78,7 @@ console.log("Hello")
 
 // OPTIONAL: additional rounds
 
+
+// LET'S PLAY
+
+placeMemoryCards(12)
