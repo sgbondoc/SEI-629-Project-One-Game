@@ -7,38 +7,63 @@ console.log("Hello")
 
 
 // SET UP GAME PAGE
-// User should see the back of 12 cards, game title, and note to start game
 
-// shuffle the cards to be placed in 12 random positions
-// show image of back of card for each of the 12 positions
-
+// User should see on the page:
+    // game title - div / h1
+    // timer - div / span id timer
+    // match counter - div / span id counter
+    // "start" button - div/ button
+    // back side of 12 cards - div class cards (image, source, value)
+    
 // GAME PLAY
-// add event listener click on card
-    // flip over card
-    // show face of card
-// add event listener click on card
-    // flip over card
-    // show face of card
 
-// check if the cards match
+// To start game OR to reset game:
+    // cards should be placed in 12 random positions
+    // show image of back of card for each of the 12 positions
+        // option: flash the front of cards at same time and flip back over to back of cards
+
+// User clicks on start button:
+    // add event listener to "start" button
+    // timer starts - function
+    // match counter will start counting matches - function
+
+// User clicks on first card (1 of 2):
+    // add event listener to cards
+    // show face of card - function
+
+// User clicks on second card (2 of 2):
+    // add event listener to cards
+    // show face of card - function
+    
+// Check if the cards match - function:
     // if match 
-        // keep cards faced up
+        // keep both cards faced up
     // if not match
-        // turn cards over to show back side
+        // turn both cards over to show back of cards
 
-// keep count of matches
-    // if selected cards are a match count++
-    // if no match do nothing
+// keep count of matches - function:
+    // if selected cards are a match
+        // count++
 
+// option: if all matches found before timer ends
+    // stop timer
+    // message user all matches found
+    // ask user to play again
+        // if yes 
+            // reset game
+        // if no
+            // say goodbye
+        
 // game timer
+    // when timer reaches 0
+        // alert user time is up
+        // alert user of match count
+        // ask user to play again - function
+            // if yes 
+                // reset game
+            // if no
+                // say goodbye
+
+// option: additional rounds
 
 
-// additional rounds
-
-
-// END OF GAME
-// alert user of results after time is up
-// continue to play
-    // if yes reset board with new order and cards faced down again
-        // next round
-    // if no say goodybye
