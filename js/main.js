@@ -11,6 +11,7 @@ console.log("Hello")
 // User should see on the page:
     // game title - div / h1
     // timer - div / span id timer
+    // OPTIONAL: round - div / span id round
     // match counter - div / span id counter
     // "start" button - div/ button
     // back side of 12 cards - div class cards (image, source, value)
@@ -20,7 +21,7 @@ console.log("Hello")
 // To start game OR to reset game:
     // cards should be placed in 12 random positions
     // show image of back of card for each of the 12 positions
-        // option: flash the front of cards at same time and flip back over to back of cards
+        // OPTIONAL: flash the front of cards at same time and flip back over to back of cards
 
 // User clicks on start button:
     // add event listener to "start" button
@@ -64,6 +65,5 @@ console.log("Hello")
             // if no
                 // say goodbye
 
-// option: additional rounds
-
+// OPTIONAL: additional rounds
 
