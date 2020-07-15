@@ -22,12 +22,16 @@ button {
     margin-left: 20px;
 }
 
-.cards {
-    display: inline-block;
-    width: 680px;
-    margin: 15px 150px 15px 150px;
+.cards-container {
+    max-width: 700px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: auto;
 }
-  
+
 .memoryCard {
     width: 120px;
     height: 180px;

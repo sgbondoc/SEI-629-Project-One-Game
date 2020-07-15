@@ -5,7 +5,6 @@ console.log("Hello")
 // Event Listeners
 // Functions / Game Logic
 let time = 30
-const cardsContainer = document.querySelector('.cards')
 // const card = document.querySelector('img')
 
 // SET UP GAME PAGE
@@ -24,17 +23,26 @@ const cardsContainer = document.querySelector('.cards')
     // cards should be placed in 12 random positions
     // show image of back of card for each of the 12 positions
         // OPTIONAL: flash the front of cards at same time and flip back over to back of cards
-        
-const placeMemoryCards = (numOfCards) => {
+
+// Container element for memory cards
+let cardsContainer = document.createElement('div')
+cardsContainer.setAttribute('class', 'cards-container')
+
+// Append card container to DOM
+document.body.appendChild(cardsContainer)
+
+// Create and place back of memory card element
+const placeCards = (numOfCards) => {
     for (let i = 0; i < numOfCards; i++) {
         let memoryCard = document.createElement('img')
         memoryCard.setAttribute('class', 'memoryCard')
         memoryCard.setAttribute('src', 'images/back.jpg')        
         memoryCard.setAttribute('value', i)
-        cardsContainer.append(memoryCard)
+        cardsContainer.appendChild(memoryCard)
     }
 }
 
+// Create array of memory cards
 let cards = []
 
 const getCards = () => {
@@ -47,6 +55,10 @@ const getCards = () => {
     }
 }
 
+placeCards(12)
+getCards()
+console.log(cards)
+
 // User clicks on start button:
     // add event listener to "start" button
     // timer starts - function
@@ -56,17 +68,18 @@ const getCards = () => {
     // add event listener to cards
     // show face of card - function
 
-const flipCard = (event) => {
-    let clickedCard = document.querySelector('img')
-    let clickedCardValue = (parseInt(clickedCard.getAttribute('value')))
-    clickedCard.setAttribute('src', cards[clickedCardValue].imageSource)
-    clickedCard.setAttribute('value', cards[clickedCardValue].imageValue)
-}
+// let clickedCard = document.querySelector('img')
 
-cardsContainer.addEventListener('click', () => {
-    console.log("This works!")
-    flipCard()
-})
+// clickedCard.addEventListener('click', () => {
+//     console.log("This works!")
+//     flipCard()
+// })
+
+// const flipCard = () => {
+//     let clickedCardValue = (parseInt(clickedCard.getAttribute('value')))
+//     clickedCard.setAttribute('src', cards[clickedCardValue].imageSource)
+//     clickedCard.setAttribute('value', cards[clickedCardValue].imageValue)
+// }
 
 // User clicks on second card (2 of 2):
     // add event listener to cards
@@ -104,8 +117,4 @@ cardsContainer.addEventListener('click', () => {
 // OPTIONAL: additional rounds
 
 
-// LET'S PLAY
 
-placeMemoryCards(12)
-getCards()
-console.log(cards)
