@@ -1,6 +1,7 @@
 body {
     background-image: url('../images/backgroundtile.jpg');
     background-size: cover;
+    background-position: cover;
     font-family: 'Noto Sans TC', sans-serif;
     color: white;
 }

@@ -6,6 +6,7 @@ console.log("Hello")
 // Functions / Game Logic
 let time = 30
 const cardsContainer = document.querySelector('.cards')
+// const card = document.querySelector('img')
 
 // SET UP GAME PAGE
 
@@ -23,16 +24,28 @@ const cardsContainer = document.querySelector('.cards')
     // cards should be placed in 12 random positions
     // show image of back of card for each of the 12 positions
         // OPTIONAL: flash the front of cards at same time and flip back over to back of cards
-
+        
 const placeMemoryCards = (numOfCards) => {
     for (let i = 0; i < numOfCards; i++) {
         let memoryCard = document.createElement('img')
         memoryCard.setAttribute('class', 'memoryCard')
-        memoryCard.setAttribute('src', 'images/back.jpg')
+        memoryCard.setAttribute('src', 'images/back.jpg')        
+        memoryCard.setAttribute('value', i)
         cardsContainer.append(memoryCard)
     }
 }
 
+let cards = []
+
+const getCards = () => {
+    for (let i = 0; i <= 11; i++) {
+        let image = {
+            imageSource: 'images/card' + i + '.jpg',
+            imageValue: i
+        }
+        cards.push(image)
+    }
+}
 
 // User clicks on start button:
     // add event listener to "start" button
@@ -42,6 +55,18 @@ const placeMemoryCards = (numOfCards) => {
 // User clicks on first card (1 of 2):
     // add event listener to cards
     // show face of card - function
+
+const flipCard = (event) => {
+    let clickedCard = document.querySelector('img')
+    let clickedCardValue = (parseInt(clickedCard.getAttribute('value')))
+    clickedCard.setAttribute('src', cards[clickedCardValue].imageSource)
+    clickedCard.setAttribute('value', cards[clickedCardValue].imageValue)
+}
+
+cardsContainer.addEventListener('click', () => {
+    console.log("This works!")
+    flipCard()
+})
 
 // User clicks on second card (2 of 2):
     // add event listener to cards
@@ -82,3 +107,5 @@ const placeMemoryCards = (numOfCards) => {
 // LET'S PLAY
 
 placeMemoryCards(12)
+getCards()
+console.log(cards)
