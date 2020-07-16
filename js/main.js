@@ -64,14 +64,6 @@ const setTimer = () => {
     
 document.querySelector('button').addEventListener('click', setTimer)
 
-const clickedCards = document.querySelectorAll('.card-container')
-
-function flipCard() {    
-    this.classList.toggle('flip')
-}
-
-clickedCards.forEach(clickedCard => clickedCard.addEventListener('click', flipCard))
-
 // User clicks on first card (1 of 2):
     // add event listener to cards
     // show face of card - function
@@ -79,7 +71,31 @@ clickedCards.forEach(clickedCard => clickedCard.addEventListener('click', flipCa
 // User clicks on second card (2 of 2):
     // add event listener to cards
     // show face of card - function
-    
+
+const clickedCards = document.querySelectorAll('.card-container')
+
+function flipCard(e) {    
+    this.classList.toggle('flip')
+    clickCard(e)
+}
+
+let clickCardValue = ''
+
+const clickCard = (e) => {
+    e.target = document.querySelector('.flip').getAttribute('value')
+    console.log(e.target)
+    clickCardValue = e.target.getAttribute('value')
+    console.log(clickCardValue)
+    // let clickValues = []
+    // clickValues.push(clickCardValue)
+    // console.log(clickValues)
+}
+
+clickedCards.forEach(clickedCard => clickedCard.addEventListener('click', flipCard))
+
+
+
+
 // Check if the cards match - function:
     // if match 
         // keep both cards faced up
