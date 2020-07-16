@@ -40,7 +40,7 @@ const getCards = () => {
 }
 
 getCards()
-console.log(cards)
+
 
 // Shuffle array of cards to random positions - function
 
@@ -59,7 +59,7 @@ const setTimer = () => {
             time = 30
             document.querySelector('#timer').innerHTML = ('TIMER: ' + time + ' SECONDS')
             document.querySelector('#timer').style.color = 'white'
-            setTimeout(function() { alert('MATCH COUNT: ' + matchCount + "/6") }, 1000)
+            setTimeout(function() { alert('Time is up! MATCH COUNT: ' + matchCount + "/6") }, 1000)
         }
     }, 1000)
 }
@@ -78,14 +78,16 @@ const clickCards = document.querySelectorAll('.card-container')
 
 function flipCard(e) {    
     this.classList.toggle('flip')
-    clickedCard(e)
+    handleCards(e)
 }
 
+let clickedCard = ''
 let clickedCardValue = ''
 let clickedValues = []
 
-const clickedCard = (e) => {
+const handleCards = (e) => {
     e.target = document.querySelector('.flip')
+    clickedCard = e.target
     clickedCardValue = e.target.getAttribute('value')
     clickedValues.push(clickedCardValue)
     if (clickedValues.length === 2) {
@@ -107,14 +109,25 @@ clickCards.forEach(clickCard => clickCard.addEventListener('click', flipCard))
 
 const checkMatch = (clickedValues) => {
     if (clickedValues[0] === clickedValues[1]) {
+        // update match counter
         matchCount++
         document.querySelector('#match-counter').innerHTML = ('MATCH COUNT: ' + matchCount + "/6")
-        // keep cards face up             
+        // lock matched cards to stay face up
+        let keepFaceUp = document.querySelectorAll('.flip')
+        keepFaceUp.forEach(element => element.removeEventListener('click', flipCard))
+        // reset array for next pair of clicks
         clickedValues.length = 0
     } else {
         // flip cards to back
+        
+        
+        
+        console.log(clickCards)   // all elements with class card-container
+        console.log(clickedCard)  // last clicked card back-card img
+        console.log(clickedCardValue)   // last clicked card value only
+        console.log(clickedValues)  // array of both values only from last 2 clicked cards
+        // reset array for next pair of clicks
         clickedValues.length = 0
-        console.log(clickedValues)
     }
 }
 
