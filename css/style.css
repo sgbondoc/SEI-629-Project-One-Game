@@ -1,9 +1,10 @@
 body {
-    background-image: url('../images/backgroundtile.jpg');
+    background-image: url('../images/backgrounddonuts.jpg');
     background-size: cover;
     background-position: cover;
     font-family: 'Noto Sans TC', sans-serif;
     color: white;
+    display: flex;
 }
 
 div {
@@ -22,7 +23,7 @@ button {
     margin-left: 20px;
 }
 
-.cards-container {
+.game-board {
     max-width: 700px;
     display: flex;
     flex-direction: row;
@@ -30,11 +31,34 @@ button {
     align-items: center;
     justify-content: space-evenly;
     margin: auto;
+    perspective: 1000px;
 }
 
-.memory-card {
+.card-container {
     width: 120px;
     height: 180px;
     margin: 25px;
     border-radius: 5px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .5s;
 }
+
+.card-container.flip {
+    transform: rotateY(180deg);
+  }
+
+.front-card, 
+.back-card {
+    width: 120px;
+    height: 180px;
+    margin: 25px;
+    border-radius: 5px;
+    position: absolute;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.6);
+    backface-visibility: hidden;
+}
+
+.front-card {
+    transform: rotateY(180deg);
+  }

@@ -24,29 +24,8 @@ console.log("Hello")
 
 let time = 30
 let matchCount = 0
-
-// Container element for memory cards
-let container = document.createElement('div')
-container.setAttribute('class', 'cards-container')
-
-// Append card container to DOM
-document.body.appendChild(container)
-
-// Create and place back of memory card element
-const placeCards = (numOfCards) => {
-    for (let i = 0; i < numOfCards; i++) {
-        let memoryCard = document.createElement('img')
-        memoryCard.setAttribute('class', 'memory-card')
-        memoryCard.setAttribute('src', 'images/back.jpg')        
-        memoryCard.setAttribute('value', i)
-        container.appendChild(memoryCard)
-    }
-    document.querySelector('.cards-container').addEventListener('click', () => {
-        console.log("This works!")
-    })
-}
-
-// Create array of memory cards
+       
+// Create array for front of cards
 let cards = []
 
 const getCards = () => {
@@ -59,19 +38,15 @@ const getCards = () => {
     }
 }
 
-placeCards(12)
 getCards()
 console.log(cards)
+
+// Shuffle array of cards to random positions - function
 
 // User clicks on start button:
     // Add event listener to "start" button
     // Timer starts - function
     // Match counter will start counting matches - function
-
-document.querySelector('button').addEventListener('click', () => {
-    console.log("This works!")
-    setTimer()
-})
 
 const setTimer = () => {
     const timer = setInterval(() => {
@@ -86,22 +61,20 @@ const setTimer = () => {
         }
     }, 1000)
 }
+    
+document.querySelector('button').addEventListener('click', setTimer)
 
+const clickedCards = document.querySelectorAll('.card-container')
+
+function flipCard() {    
+    this.classList.toggle('flip')
+}
+
+clickedCards.forEach(clickedCard => clickedCard.addEventListener('click', flipCard))
 
 // User clicks on first card (1 of 2):
     // add event listener to cards
     // show face of card - function
-
-// const flipCard = (event) => {
-//     let clickedCard = document.querySelector('.memory-card')
-//     let clickedCardValue = (parseInt(clickedCard.getAttribute('value')))
-//     if (event.target === cardContainer) {
-//         // do nothing
-//     } else if (event.target === clickedCard) {
-//         clickedCard.setAttribute('src', cards[clickedCardValue].imageSource)
-//         clickedCard.setAttribute('value', cards[clickedCardValue].imageValue)
-//     }
-// }
 
 // User clicks on second card (2 of 2):
     // add event listener to cards
