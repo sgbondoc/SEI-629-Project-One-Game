@@ -26,6 +26,7 @@ let time = 30
 let matchCount = 0
        
 // Create array for front of cards
+// Shuffle cards
 let cards = []
 
 const getCards = () => {
@@ -58,6 +59,7 @@ const setTimer = () => {
             time = 30
             document.querySelector('#timer').innerHTML = ('TIMER: ' + time + ' SECONDS')
             document.querySelector('#timer').style.color = 'white'
+            setTimeout(function() { alert('MATCH COUNT: ' + matchCount + "/6") }, 1000)
         }
     }, 1000)
 }
@@ -72,29 +74,26 @@ document.querySelector('button').addEventListener('click', setTimer)
     // add event listener to cards
     // show face of card - function
 
-const clickedCards = document.querySelectorAll('.card-container')
+const clickCards = document.querySelectorAll('.card-container')
 
 function flipCard(e) {    
     this.classList.toggle('flip')
-    clickCard(e)
+    clickedCard(e)
 }
 
-let clickCardValue = ''
+let clickedCardValue = ''
+let clickedValues = []
 
-const clickCard = (e) => {
-    e.target = document.querySelector('.flip').getAttribute('value')
-    console.log(e.target)
-    clickCardValue = e.target.getAttribute('value')
-    console.log(clickCardValue)
-    // let clickValues = []
-    // clickValues.push(clickCardValue)
-    // console.log(clickValues)
+const clickedCard = (e) => {
+    e.target = document.querySelector('.flip')
+    clickedCardValue = e.target.getAttribute('value')
+    clickedValues.push(clickedCardValue)
+    if (clickedValues.length === 2) {
+        checkMatch(clickedValues)
+    }
 }
 
-clickedCards.forEach(clickedCard => clickedCard.addEventListener('click', flipCard))
-
-
-
+clickCards.forEach(clickCard => clickCard.addEventListener('click', flipCard))
 
 // Check if the cards match - function:
     // if match 
@@ -105,6 +104,20 @@ clickedCards.forEach(clickedCard => clickedCard.addEventListener('click', flipCa
 // keep count of matches - function:
     // if selected cards are a match
         // count++
+
+const checkMatch = (clickedValues) => {
+    if (clickedValues[0] === clickedValues[1]) {
+        matchCount++
+        document.querySelector('#match-counter').innerHTML = ('MATCH COUNT: ' + matchCount + "/6")
+        // keep cards face up             
+        clickedValues.length = 0
+    } else {
+        // flip cards to back
+        clickedValues.length = 0
+        console.log(clickedValues)
+    }
+}
+
 
 // option: if all matches found before timer ends
     // stop timer
