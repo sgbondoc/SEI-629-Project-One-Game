@@ -13,7 +13,6 @@
 - User will continue to flip over cards (two at a time) and once all have been matched the game is over
 - Message the user the game is over and ask to play again
     - If user agrees to play again, cards reset (moved to new positions and turned over to show back side of cards)
-    - If user doesn't want to play again, say goodbye
     
 ### Other Considerations:
 - Add a timer for user to play against and find all matching pairs within alloted time

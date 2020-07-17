@@ -61,4 +61,9 @@ button {
 
 .front-card {
     transform: rotateY(180deg);
-  }
+    -moz-transform-origin: 35px;
+    -ms-transform-origin: 35px;
+    -o-transform-origin: 35px;
+    -webkit-transform-origin: 35px;
+    transform-origin: 35px;
+}
