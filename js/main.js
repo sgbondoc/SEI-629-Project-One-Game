@@ -238,6 +238,7 @@ const setTimer = () => {
         time--
         if (matchCount === 6) {
             clearInterval(timer)
+            time = 0
             setTimeout(function() { alert('Awesome! You found all the matches!') }, 1000)
         }
         if (time === 0) {
