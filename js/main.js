@@ -12,10 +12,7 @@ console.log("Hello")
     // "START" button
     // 12 cards
     
-    // Cards should be placed in 12 random positions face down
-    // OPTIONAL: Flash the front of cards at same time and flip back over to back of cards
-    
-// Create object for cards and placement
+// Create object for game set up of cards and placement on page
 let gameSetup = {
 
     cardValues: ['burger-king', 'five-guys', 'in-n-out', 'kfc', 'mcdonalds', 'nathans', 'burger-king', 'five-guys', 'in-n-out', 'kfc', 'mcdonalds', 'nathans'],
@@ -50,7 +47,6 @@ let gameSetup = {
             let image = {
                 class:'front-card',
                 src: 'images/card' + i + '.jpg',
-                alt: this.cardValues[i],
                 value: this.cardValues[i]
             }
             this.frontCards.push(image)
@@ -74,7 +70,7 @@ let gameSetup = {
             let createCardDivs = document.createElement('div')
             createCardDivs.setAttribute ('class', this.divContainers[i].class)
             createCardDivs.setAttribute ('id', this.divContainers[i].id)
-            createCardDivs.setAttribute ('title', this.divContainers[i].title)
+            createCardDivs.setAttribute ('data-title', this.divContainers[i].title)
             this.divCardElements.push(createCardDivs)                
         }
     },
@@ -85,7 +81,6 @@ let gameSetup = {
             let createImage = document.createElement('img')
             createImage.setAttribute ('class', this.frontCards[i].class) 
             createImage.setAttribute ('src', this.frontCards[i].src) 
-            createImage.setAttribute ('alt', this.frontCards[i].alt) 
             createImage.setAttribute ('value', this.frontCards[i].value) 
             this.frontImageElements.push(createImage)
         }
@@ -155,6 +150,34 @@ let gameSetup = {
             const main = document.querySelector('.game-board')
             main.appendChild(this.memoryCardElements[i].div)
         }    
+    },
+
+    restartGame: function () {
+        let gameBoard = document.querySelector('.game-board')
+        while (gameBoard.hasChildNodes()) {
+            gameBoard.removeChild(gameBoard.firstChild)
+        }
+        this.memoryCardElements.length = 0
+        clickCards.forEach(element => element.setAttribute('class', 'card-container'))
+        time = 30
+        matchCount = 0
+        document.querySelector('#match-counter').innerHTML = ('MATCH COUNT: ' + matchCount + "/6")
+    },
+
+    setGame: function () {
+        this.cardContainers()
+        this.frontImages()
+        this.backImages()
+
+        this.createDivs()
+        this.createFront()
+        this.createBack()
+
+        this.appendDiv()
+        this.appendFront()
+        this.appendBack()
+
+        this.allCardElements()
     }
 }    
 
@@ -176,10 +199,10 @@ gameSetup.appendDiv()
 gameSetup.appendFront()
 gameSetup.appendBack()
 
-// all game elements set up in object
+// all game elements set up in an object
 gameSetup.allCardElements()
-    
-        
+
+
 // GAME PLAY
 
 let time = 30
@@ -191,15 +214,20 @@ let clickedValues = []
 
 const clickCards = document.querySelectorAll('.card-container')
 
+// const main = document.querySelector('.game-board')
+
+// gameSetup.startGame()
+
 // To start game:
 
     // User clicks on start button:
     // Add event listener to "start" button
     // Game board becomes clickable
+    // Flash front of cards
     // Timer starts
     // Match counter set at 0
     // Shuffle array of cards to random positions
-    // Reset game board => NEED TO DO
+    // Reset game board
 
 const setTimer = () => {
     // start timer in red
@@ -207,14 +235,16 @@ const setTimer = () => {
         document.querySelector('#timer').innerHTML = ('TIMER: ' + time + ' SECONDS')
         document.querySelector('#timer').style.color = 'red'
         time--
+        if (matchCount === 6) {
+            clearInterval(timer)
+            setTimeout(function() { alert('Awesome! You found all the matches!') }, 1000)
+        }
         if (time === 0) {
             // reset timer and back to white
             clearInterval(timer)
-            time = 30
             document.querySelector('#timer').innerHTML = ('TIMER: ' + time + ' SECONDS')
             document.querySelector('#timer').style.color = 'white'
-            setTimeout(function() { alert('Time is up! MATCH COUNT: ' + matchCount + '/6') }, 1000)
-            // clickCards.removeEventListener('click', flipCard)
+            setTimeout(function() { alert('Time is up! Match Count: ' + matchCount + '/6') }, 1000)
         }
     }, 1000)
 
@@ -223,16 +253,35 @@ const setTimer = () => {
 }
     
 // event listeners for click on start button
-document.querySelector('button').addEventListener('click', function () {
-    setTimer()
-
-    gameSetup.shuffle(gameSetup.memoryCardElements)
-    console.log(gameSetup.memoryCardElements)
+// document.querySelector('button').addEventListener('click', function () {
     
+//     setTimeout(function() {
+//         clickCards.forEach(element => element.setAttribute('class', '.flip'))
+//     }, 5000)
+
+//     setTimeout(function() {
+//         clickCards.forEach(element => element.setAttribute('class', 'card-container'))
+//     }, 5000)
+// })
+
+document.querySelector('button').addEventListener('click', function () {
+    gameSetup.shuffle(gameSetup.memoryCardElements)
     gameSetup.appendShuffleElements()
+    
+    setTimer()
 })
 
-// document.querySelector('button').addEventListener('click' resetGame)
+// event listener for click on restart button
+document.querySelector('#restart').addEventListener('click', function () {
+    gameSetup.restartGame()
+
+    gameSetup.setGame()
+    
+    gameSetup.shuffle(gameSetup.memoryCardElements)
+    gameSetup.appendShuffleElements()
+   
+    setTimer()
+})
 
 // User clicks on 2 cards at a time:
 
@@ -272,13 +321,13 @@ const checkMatch = (clickedValues) => {
     } else {
         // an umatched pair will flip face down
         // access first card element with div card-container flip && clicked card value
-        let faceDown1 = document.querySelectorAll(`[title="${clickedValues[0]}"]`)
+        let faceDown1 = document.querySelectorAll(`[data-title="${clickedValues[0]}"]`)
         // set that class attribute to card-container to flip back over
         setTimeout(function() {
             faceDown1.forEach(element => element.setAttribute('class', 'card-container'))
         }, 1000)
         // access second card element with div card-container flip && clicked card value
-        let faceDown2 = document.querySelectorAll(`[title="${clickedValues[1]}"]`)
+        let faceDown2 = document.querySelectorAll(`[data-title="${clickedValues[1]}"]`)
         setTimeout(function() {
             faceDown2.forEach(element => element.setAttribute('class', 'card-container'))
         }, 1000)        
