@@ -18,10 +18,18 @@ h1 {
 }
 
 button {
+    width: 100px;
     padding: 10px;
     margin-top: 10px;
     margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+/* /* .fa {
+
+} */
 
 .game-board {
     max-width: 700px;
@@ -46,7 +54,7 @@ button {
 
 .card-container.flip {
     transform: rotateY(180deg);
-  }
+}
 
 .front-card, 
 .back-card {
@@ -66,4 +74,50 @@ button {
     -o-transform-origin: 35px;
     -webkit-transform-origin: 35px;
     transform-origin: 35px;
+}
+
+@media only screen and (max-width: 480px) {
+    .game-board {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: auto;
+        perspective: 1000px;
+    }
+    
+    .card-container {
+        width: 60px;
+        height: 90px;
+        margin: 12px;
+        border-radius: 5px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform .5s;
+    }
+    
+    .card-container.flip {
+        transform: rotateY(180deg);
+      }
+    
+    .front-card, 
+    .back-card {
+        width: 60px;
+        height: 90px;
+        margin: 12px;
+        border-radius: 5px;
+        position: absolute;
+        box-shadow: 1px 1px 1px rgba(0,0,0,.6);
+        backface-visibility: hidden;
+    }
+
+    .front-card {
+        transform: rotateY(180deg);
+        -moz-transform-origin: 18px;
+        -ms-transform-origin: 18px;
+        -o-transform-origin: 18px;
+        -webkit-transform-origin: 18px;
+        transform-origin: 18px;
+    }
 }

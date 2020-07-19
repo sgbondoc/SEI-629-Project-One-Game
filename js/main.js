@@ -210,13 +210,14 @@ let matchCount = 0
 
 let clickedCard = ''
 let clickedCardValue = ''
+let clickedClasses = []
 let clickedValues = []
 
 const clickCards = document.querySelectorAll('.card-container')
 
 // const main = document.querySelector('.game-board')
 
-// gameSetup.startGame()
+// gameSetup.setGame()
 
 // To start game:
 
@@ -252,18 +253,7 @@ const setTimer = () => {
     clickCards.forEach(clickCard => clickCard.addEventListener('click', flipCard))
 }
     
-// event listeners for click on start button
-// document.querySelector('button').addEventListener('click', function () {
-    
-//     setTimeout(function() {
-//         clickCards.forEach(element => element.setAttribute('class', '.flip'))
-//     }, 5000)
-
-//     setTimeout(function() {
-//         clickCards.forEach(element => element.setAttribute('class', 'card-container'))
-//     }, 5000)
-// })
-
+// event listener for click on start button
 document.querySelector('button').addEventListener('click', function () {
     gameSetup.shuffle(gameSetup.memoryCardElements)
     gameSetup.appendShuffleElements()
@@ -294,7 +284,12 @@ function flipCard(e) {
 const handleCards = (e) => {
     // exact element image class back-card 
     e.target = document.querySelector('.flip')
+    console.log(e.target)
     clickedCard = e.target
+    // card class only
+    clickedCardClass = e.target.getAttribute('class')
+    // pushes classes of cards clicked into an empty array
+    clickedClasses.push(clickedCardClass)
     // card value only
     clickedCardValue = e.target.getAttribute('value')
     // pushes values of cards clicked into an empty array
@@ -309,7 +304,7 @@ const handleCards = (e) => {
 
 const checkMatch = (clickedValues) => {
     // takes parameter array and checks the card values for a match
-    if (clickedValues[0] === clickedValues[1]) {
+    if (clickedValues[0] === clickedValues[1] && clickedClasses[0] == clickedClasses[1]) {
         // update match counter
         matchCount++
         document.querySelector('#match-counter').innerHTML = ('MATCH COUNT: ' + matchCount + "/6")
@@ -317,7 +312,8 @@ const checkMatch = (clickedValues) => {
         let keepFaceUp = document.querySelectorAll('.flip')
         keepFaceUp.forEach(element => element.removeEventListener('click', flipCard))
         // reset array for next pair of clicks
-        clickedValues.length = 0        
+        clickedClasses.length = 0
+        clickedValues.length = 0      
     } else {
         // an umatched pair will flip face down
         // access first card element with div card-container flip && clicked card value
@@ -332,6 +328,7 @@ const checkMatch = (clickedValues) => {
             faceDown2.forEach(element => element.setAttribute('class', 'card-container'))
         }, 1000)        
         // reset array for next pair of clicks
+        clickedClasses.length = 0
         clickedValues.length = 0
     }
 }
