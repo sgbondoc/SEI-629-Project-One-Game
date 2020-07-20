@@ -19,8 +19,8 @@
 
 ### Future Features:
 - Create additional rounds with more cards each round for user to match and/or decrease time to find all matches
-- Before game starts, turn over all cards for user to get a quick view before only back sides of cards are in view
-- Responsive to different size browsers and devices
+- Before game starts, turn over all cards for user to get a quick view before only back sides of cards are shown
+- Responsive to different browsers and devices
 
 
 ### Wireframes:
