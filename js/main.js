@@ -7,7 +7,6 @@ console.log("Hello")
     // User should see on the page:
     // Game title
     // Timer
-    // OPTIONAL: round counter
     // Match counter
     // "START" button
     // 12 cards
@@ -31,6 +30,7 @@ let gameSetup = {
 
     memoryCardElements: [],
     
+    // array for each card container
     cardContainers: function () {
         for (let i = 0; i < this.cardValues.length; i ++) {
             let container = {
@@ -42,6 +42,7 @@ let gameSetup = {
         }
     },
     
+    // array for each front image
     frontImages: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             let image = {
@@ -53,6 +54,7 @@ let gameSetup = {
         }
     },
     
+    // array for each back image
     backImages: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             let image = {
@@ -65,6 +67,7 @@ let gameSetup = {
         }    
     },
     
+    // array for each div element
     createDivs: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             let createCardDivs = document.createElement('div')
@@ -75,7 +78,7 @@ let gameSetup = {
         }
     },
 
-
+    // array for each front image element
     createFront: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             let createImage = document.createElement('img')
@@ -86,6 +89,7 @@ let gameSetup = {
         }
     },    
     
+    // array for each back image element
     createBack: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             let createImage = document.createElement('img')
@@ -97,6 +101,7 @@ let gameSetup = {
         }
     },    
     
+    // array to append each div card container
     appendDiv: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             const main = document.querySelector('.game-board')
@@ -104,6 +109,7 @@ let gameSetup = {
         }    
     },
 
+    // array to append each front image to div card container
     appendFront: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             let card = document.querySelector(`[id="${this.divContainers[i].id}"]`)
@@ -111,6 +117,7 @@ let gameSetup = {
         }
     },
 
+    // array to append each back image to div card container
     appendBack: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             let card = document.querySelector(`[id="${this.divContainers[i].id}"]`)
@@ -118,6 +125,7 @@ let gameSetup = {
         }
     },
 
+    // array of all game elements in object
     allCardElements: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             let memoryCardElement = {
@@ -141,10 +149,10 @@ let gameSetup = {
             array[m] = array[i]
             array[i] = t
         }
-        
         return array
     },
 
+    // array to append shuffled elements
     appendShuffleElements: function () {
         for (let i = 0; i < this.cardValues.length; i++) {
             const main = document.querySelector('.game-board')
@@ -152,7 +160,8 @@ let gameSetup = {
         }    
     },
 
-    restartGame: function () {
+    // start game method
+    startGame: function () {
         let gameBoard = document.querySelector('.game-board')
         while (gameBoard.hasChildNodes()) {
             gameBoard.removeChild(gameBoard.firstChild)
@@ -164,6 +173,7 @@ let gameSetup = {
         document.querySelector('#match-counter').innerHTML = ('MATCH COUNT: ' + matchCount + "/6")
     },
 
+    // set game elements method
     setGame: function () {
         this.cardContainers()
         this.frontImages()
@@ -181,7 +191,13 @@ let gameSetup = {
     }
 }    
 
-// Call functions to create, place, and append memory game elements
+// Call functions to create, append, and set memory game elements 
+
+// // start game via object method
+// // (didn't work, need to rework code)
+// const main = document.querySelector('.game-board')
+// gameSetup.setGame()
+
 
 // array of each card container attributes and images
 gameSetup.cardContainers()
@@ -215,20 +231,26 @@ let clickedValues = []
 
 const clickCards = document.querySelectorAll('.card-container')
 
-// const main = document.querySelector('.game-board')
-
-// gameSetup.setGame()
-
 // To start game:
 
     // User clicks on start button:
     // Add event listener to "start" button
-    // Game board becomes clickable
-    // Flash front of cards
     // Timer starts
     // Match counter set at 0
     // Shuffle array of cards to random positions
-    // Reset game board
+    // Set game board
+    // Game board becomes clickable
+    
+// event listener for click on start button
+document.querySelector('button').addEventListener('click', function () {
+    gameSetup.startGame()
+    gameSetup.setGame()
+    
+    gameSetup.shuffle(gameSetup.memoryCardElements)
+    gameSetup.appendShuffleElements()
+    
+    setTimer()
+})
 
 const setTimer = () => {
     // start timer in red
@@ -236,6 +258,7 @@ const setTimer = () => {
         document.querySelector('#timer').innerHTML = ('TIMER: ' + time + ' SECONDS')
         document.querySelector('#timer').style.color = 'red'
         time--
+        // stop timer if user finds all matches before alloted time
         if (matchCount === 6) {
             clearInterval(timer)
             time = 0
@@ -249,31 +272,11 @@ const setTimer = () => {
             setTimeout(function() { alert('Time is up! Match Count: ' + matchCount + '/6') }, 1000)
         }
     }, 1000)
-
+    
     // event listener for clicks on cards
     clickCards.forEach(clickCard => clickCard.addEventListener('click', flipCard))
 }
     
-// event listener for click on start button
-document.querySelector('button').addEventListener('click', function () {
-    gameSetup.shuffle(gameSetup.memoryCardElements)
-    gameSetup.appendShuffleElements()
-    
-    setTimer()
-})
-
-// event listener for click on restart button
-document.querySelector('#restart').addEventListener('click', function () {
-    gameSetup.restartGame()
-
-    gameSetup.setGame()
-    
-    gameSetup.shuffle(gameSetup.memoryCardElements)
-    gameSetup.appendShuffleElements()
-   
-    setTimer()
-})
-
 // User clicks on 2 cards at a time:
 
 // click event on a card invokes function to flip card, then handles cards, and checks for matches
@@ -298,6 +301,9 @@ const handleCards = (e) => {
     // after two clicks, check card for a match
     if (clickedValues.length === 2) {
         checkMatch(clickedValues)
+        // // diasable clicks while match is checked
+        // // (didn't work, need to rework code)
+        // clickCards.forEach(element => element.removeEventListener('click', flipCard))
     }
 }
 
@@ -309,12 +315,12 @@ const checkMatch = (clickedValues) => {
         // update match counter
         matchCount++
         document.querySelector('#match-counter').innerHTML = ('MATCH COUNT: ' + matchCount + "/6")
-        // lock matched cards to stay face up
+        // keep matched cards face up
         let keepFaceUp = document.querySelectorAll('.flip')
-        keepFaceUp.forEach(element => element.removeEventListener('click', flipCard))
+        keepFaceUp.forEach(element => element.removeEventListener('click', flipCard)) 
         // reset array for next pair of clicks
         clickedClasses.length = 0
-        clickedValues.length = 0      
+        clickedValues.length = 0
     } else {
         // an umatched pair will flip face down
         // access first card element with div card-container flip && clicked card value
@@ -332,6 +338,7 @@ const checkMatch = (clickedValues) => {
         clickedClasses.length = 0
         clickedValues.length = 0
     }
+    // // enable clicks after match is checked
+    // // (didn't work, need to rework code)
+    // clickCards.forEach(clickCard => clickCard.addEventListener('click', flipCard))
 }
-
-// OPTIONAL: additional rounds
